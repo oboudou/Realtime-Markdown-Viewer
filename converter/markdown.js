@@ -78,4 +78,25 @@ var markdown = {
   }
 };
 
+
++ var parseCode = function(str) {
++  var codeRegExp = /`{1}(\w+)`{1}/;
++  var stra = [];
++  while ((stra = codeRegExp.exec(str)) !== null) {
++    str = str.replace(stra[0], '<pre>' + stra[1] + '</pre>');
++  }
++  return str;
++ }
++
+ 
+ var markdown = {
+   parse: function (str, strict) {
+@@ -74,6 +83,7 @@ var markdown = {
+     str = parseStrong(str);
+     str = parseHorizontaleLine(str);
+     str = parseLink(str);
++    str = parseCode(str);
+     return str;
+   }
+ };
 module.exports = markdown;
